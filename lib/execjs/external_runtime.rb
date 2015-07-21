@@ -65,6 +65,7 @@ module ExecJS
         end
 
         def extract_result(output, filename)
+output = output[/\[".*/] if output.match /^DEPRECATION/
           status, value, stack = output.empty? ? [] : ::JSON.parse(output, create_additions: false)
           if status == "ok"
             value
